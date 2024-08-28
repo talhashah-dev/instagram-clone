@@ -1,2 +1,2 @@
-# InstagramClone
-Instagram Clone with Next and Firebase
+# Instagram Clone
+Instagram Clone with Next.js and Firebase
