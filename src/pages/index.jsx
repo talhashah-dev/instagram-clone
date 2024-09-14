@@ -3,9 +3,9 @@ import Head from 'next/head';
 
 export default function Home() {
   return (
-      <div className="bg-black flex">
+      <div className="bg-black flex max-sm:flex-col-reverse max-sm:h-screen">
         <Sidebar />
-        <h1 className="text-white text-lg">Home Page</h1>
+        <h1 className="text-white text-lg max-sm:h-screen">Home Page</h1>
       </div>
   );
 }

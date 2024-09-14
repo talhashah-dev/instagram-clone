@@ -3,9 +3,9 @@ import React from "react";
 
 const profile = () => {
   return (
-    <div className="bg-black w-full flex">
+    <div className="bg-black flex max-sm:flex-col-reverse max-sm:h-screen">
       <Sidebar />
-      <h1 className="text-white text-lg">Profile Page</h1>
+      <h1 className="text-white text-lg max-sm:h-screen">Profile Page</h1>
     </div>
   );
 };

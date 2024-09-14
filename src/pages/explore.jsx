@@ -3,9 +3,9 @@ import React from "react";
 
 const explore = () => {
   return (
-    <div className="bg-black w-full flex">
+    <div className="bg-black flex max-sm:flex-col-reverse max-sm:h-screen">
       <Sidebar />
-      <h1 className="text-white text-zlg">Explore Page</h1>
+      <h1 className="text-white text-lg max-sm:h-screen">Explore Page</h1>
     </div>
   );
 };
