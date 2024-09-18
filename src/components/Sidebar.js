@@ -11,7 +11,7 @@ import {
   Heart,
   PlusSquare,
   Menu,
-  Settings,
+  Settings, 
   Activity,
   Bookmark,
   Moon,
@@ -39,6 +39,14 @@ const Sidebar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+
+  const loveMessage = () => {
+    return "You're like the semicolon to my code; without you, everything falls apart.";
+  };
+  
+  console.log(loveMessage());
+  
 
   const links = [
     { icon: <Home size={24} />, title: "Home", path: "/" },
