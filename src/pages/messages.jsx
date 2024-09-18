@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import React from "react";
 
-const messages = () => {
+const Messages = () => {
   return (
     <div className="bg-black flex max-sm:flex-col-reverse max-sm:h-screen">
     <Sidebar />
@@ -10,4 +10,4 @@ const messages = () => {
   );
 };
 
-export default messages;
+export default Messages;

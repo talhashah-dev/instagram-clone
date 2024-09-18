@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import React from "react";
 
-const reels = () => {
+const Reels = () => {
   return (
     <div className="bg-black flex max-sm:flex-col-reverse max-sm:h-screen">
       <Sidebar />
@@ -10,4 +10,4 @@ const reels = () => {
   );
 };
 
-export default reels;
+export default Reels;
