@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Instagram</title>
         <meta name="description" content="A clone of Instagram built with Next.js and Firebase" />
         <meta name="keywords" content="Instagram, clone, Next.js, Firebase, social media" />
         <meta name="author" content="SMIT Batch 10 Team" />
