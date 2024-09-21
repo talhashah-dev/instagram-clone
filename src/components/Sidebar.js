@@ -57,7 +57,7 @@ const Sidebar = () => {
     {
       icon: <Heart size={24} />,
       title: "Notifications",
-      path: "/notifications",
+      path: "#",
     },
     { icon: <PlusSquare size={24} />, title: "Create", path: "#" },
   ];

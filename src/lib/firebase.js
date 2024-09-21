@@ -1,6 +1,10 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore , doc , setDoc } from "firebase/firestore";
+import { initializeApp, getApps } from "firebase/app";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -10,20 +14,30 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0];
+}
+
 const auth = getAuth(app);
 const db = getFirestore(app);
-const analytics = getAnalytics(app);
+
+let analytics;
+if (typeof window !== "undefined") {
+  analytics = getAnalytics(app);
+}
 
 export {
-   auth,
-   db,
-   doc,
-   setDoc,
-   createUserWithEmailAndPassword,
-   signInWithEmailAndPassword,
-
-  
-   };
+  auth,
+  db,
+  doc,
+  setDoc,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  analytics,
+};
