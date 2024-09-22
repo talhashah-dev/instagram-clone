@@ -4,8 +4,8 @@ import insta from "@/assets/images/insta.png";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-solid-svg-icons";
-import Btn from "@/components/btn.jsx";
-import Input from "@/components/input.jsx";
+import Btn from "@/common/btn.jsx";
+import Input from "@/common/input.jsx";
 import Link from "next/link";
 import {
   auth,

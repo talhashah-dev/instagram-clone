@@ -3,11 +3,11 @@ import Image from "next/image";
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
 import { faFacebook } from "@fortawesome/free-solid-svg-icons";
-import Btn from "@/components/btn.jsx";
+import Btn from "@/common/btn.jsx";
 import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
-import Input from "@/components/input.jsx";
+import Input from "@/common/input.jsx";
 import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
 import { useRouter } from "next/router";
 
