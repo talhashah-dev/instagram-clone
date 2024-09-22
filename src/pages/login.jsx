@@ -9,8 +9,10 @@ import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
 import Input from "@/components/input.jsx";
 import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
+import { useRouter } from "next/router";
 
-const Page = () => {
+const Login = () => {
+  const router = useRouter();
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -31,8 +33,8 @@ const Page = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          alert("Login Successfully Done ");
-          // ...
+          router.push("/")
+          // alert("Login Successfully Done ");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -124,4 +126,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Login;
