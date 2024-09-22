@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-solid-svg-icons";
 import Btn from "@/components/btn.jsx";
 import Input from "@/components/input.jsx";
 import Link from "next/link";
+import Swal from "sweetalert2";
+
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -17,6 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
+
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -33,6 +34,7 @@ const Signup = () => {
       ...formData,
       [name]: value,
     });
+
   };
 
   const handleSubmit = () => {
@@ -51,12 +53,24 @@ const Signup = () => {
           router.push("/login");
         })
         .catch((error) => {
-          const errorCode = error.code;
+
           const errorMessage = error.message;
-          console.log(errorMessage);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessage,
+
+          });
+
         });
     } else {
-      console.log("All fields are required");
+      Swal.fire({
+        icon: 'warning',
+        title: 'All fields are required!',
+        text: 'Please fill out all the fields.',
+
+      });
     }
   };
 
@@ -73,12 +87,11 @@ const Signup = () => {
         </div>
 
         <div className=" bg-cyan-500 flex justify-center  w-60 mt-5 m-auto py-2 gap-2 rounded-md">
-          <Link href="/Facebook">
+          <Link href="/login">
             <Btn
               className="text-xs text-white font-bold ml-2"
-              icon={faFacebook}
               style={{ color: "white" }}
-              value="Log in with Facebook"
+              value="Already have an account "
             />
           </Link>
         </div>
@@ -158,8 +171,9 @@ const Signup = () => {
             <span className="font-medium text-cyan-800">Terms</span> ,
             <span className="font-medium text-cyan-800">Privacy Policy</span>{" "}
             and
-            <span className="font-medium text-cyan-800">Cookies Policy</span> .
+            <span className="font-medium text-cyan-800"> Cookies Policy</span> .
           </p>
+
         </div>
       </div>
     </div>

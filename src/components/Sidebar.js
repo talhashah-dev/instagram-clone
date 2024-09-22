@@ -11,7 +11,7 @@ import {
   Heart,
   PlusSquare,
   Menu,
-  Settings, 
+  Settings,
   Activity,
   Bookmark,
   Moon,
@@ -44,9 +44,9 @@ const Sidebar = () => {
   const loveMessage = () => {
     return "You're like the semicolon to my code; without you, everything falls apart.";
   };
-  
+
   console.log(loveMessage());
-  
+
 
   const links = [
     { icon: <Home size={24} />, title: "Home", path: "/" },
@@ -84,9 +84,8 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-screen ${
-          isExpanded ? "w-[244px]" : "w-[72px]"
-        } border-r border-gray-800 bg-black text-white p-3 transition-all duration-300 ease-in-out z-50`}
+        className={`fixed top-0 left-0 h-screen ${isExpanded ? "w-[244px]" : "w-[72px]"
+          } border-r border-gray-800 bg-black text-white p-3 transition-all duration-300 ease-in-out z-50`}
       >
         <div className="py-3 mb-6">
           {isExpanded ? (
@@ -107,9 +106,8 @@ const Sidebar = () => {
               <li key={link.title}>
                 <button
                   onClick={() => handleNavigation(link.path)}
-                  className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 active:bg-zinc-700  w-full text-left ${
-                    router.pathname === link.path ? "font-bold bg-zinc-800" : ""
-                  } ${isExpanded ? "" : "justify-center"}`}
+                  className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 active:bg-zinc-700  w-full text-left ${router.pathname === link.path ? "font-bold bg-zinc-800" : ""
+                    } ${isExpanded ? "" : "justify-center"}`}
                 >
                   {link.icon}
                   {isExpanded && <span>{link.title}</span>}
@@ -121,9 +119,8 @@ const Sidebar = () => {
         <div className="mt-auto">
           <button
             onClick={() => handleNavigation("/profile")}
-            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full ${
-              router.pathname === "/profile" ? "font-bold bg-zinc-800" : ""
-            } ${isExpanded ? "" : "justify-center"}`}
+            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full ${router.pathname === "/profile" ? "font-bold bg-zinc-800" : ""
+              } ${isExpanded ? "" : "justify-center"}`}
           >
             <Image
               src="/placeholder.svg?height=24&width=24"
@@ -135,9 +132,8 @@ const Sidebar = () => {
             {isExpanded && <span>Profile</span>}
           </button>
           <button
-            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full mt-2 ${
-              isExpanded ? "" : "justify-center"
-            }`}
+            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full mt-2 ${isExpanded ? "" : "justify-center"
+              }`}
             onClick={toggleModal}
           >
             <Menu size={24} />
