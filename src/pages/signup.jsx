@@ -46,9 +46,9 @@ const Signup = () => {
           const res = userCredential.user;
           await setDoc(doc(db, "user", res.uid), formData);
           router.push("/");
-          console.log(res)
         })
         .catch((error) => {
+          const errorMessage = error.message;
           Swal.fire({
             icon: "error",
             title: "Oops...",
