@@ -8,6 +8,7 @@ import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
 import Input from "@/components/input.jsx";
+import Swal from "sweetalert2";
 import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
 
 const Page = () => {
@@ -29,18 +30,27 @@ const Page = () => {
       console.log(data);
       signInWithEmailAndPassword(auth, data.username, data.password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
-          alert("Login Successfully Done ");
-          // ...
+          Swal.fire("You're Welcome!");
         })
         .catch((error) => {
-          const errorCode = error.code;
+
           const errorMessage = error.message;
-          console.log(errorMessage);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessage,
+            customClass: {
+              customColor: 'custom-color',
+            }
+          });
         });
     } else {
-      console.log("Please Fill the field for Login");
+      Swal.fire({
+        icon: 'warning',
+        title: 'All fields are required!',
+        text: 'Please fill out all the fields.',
+      });
     }
   };
 
@@ -98,7 +108,7 @@ const Page = () => {
         </div>
 
         <div className="mt-7 flex justify-center items-center gap-1 md:border-2 md:w-80 md:h-4 md:m-auto md:mt-5 md:py-5 ">
-          <p className="text-xs md:text-base"> Don&apos;t have an account ?</p>
+          <p className="text-xs md:text-base"> Don't have an account ?</p>
           <Link
             href="/signup"
             className="text-xs font-semibold text-cyan-500  md:text-base"
