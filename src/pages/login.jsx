@@ -9,11 +9,11 @@ import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
 import Input from "@/common/input.jsx";
-import Swal from "sweetalert2";
 import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
-const Page = () => {
+const Login = () => {
   const router = useRouter();
   const [data, setData] = useState({
     username: "",
@@ -30,10 +30,9 @@ const Page = () => {
 
   const handleSubmit = () => {
     if (data.password && data.username) {
-      console.log(data);
       signInWithEmailAndPassword(auth, data.username, data.password)
         .then((userCredential) => {
-          router.push("/")
+          router.push("/");
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -135,4 +134,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Login;

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/layout/Sidebar";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/Loader/loader.jsx";

@@ -35,7 +35,6 @@ const Signup = () => {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
     if (
       formData.email &&
       formData.password &&
@@ -47,16 +46,14 @@ const Signup = () => {
           const res = userCredential.user;
           await setDoc(doc(db, "user", res.uid), formData);
           router.push("/");
-          console.log(res)
         })
         .catch((error) => {
           const errorMessage = error.message;
-          console.log(errorMessage)
-          // Swal.fire({
-          //   icon: "error",
-          //   title: "Oops...",
-          //   text: errorMessage,
-          // });
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errorMessage,
+          });
         });
     } else {
       Swal.fire({
