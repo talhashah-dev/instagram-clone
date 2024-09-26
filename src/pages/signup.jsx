@@ -35,7 +35,6 @@ const Signup = () => {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
     if (
       formData.email &&
       formData.password &&
@@ -50,13 +49,11 @@ const Signup = () => {
           console.log(res)
         })
         .catch((error) => {
-          const errorMessage = error.message;
-          console.log(errorMessage)
-          // Swal.fire({
-          //   icon: "error",
-          //   title: "Oops...",
-          //   text: errorMessage,
-          // });
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errorMessage,
+          });
         });
     } else {
       Swal.fire({

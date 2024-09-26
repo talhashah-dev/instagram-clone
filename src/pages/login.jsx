@@ -30,7 +30,6 @@ const Page = () => {
 
   const handleSubmit = () => {
     if (data.password && data.username) {
-      console.log(data);
       signInWithEmailAndPassword(auth, data.username, data.password)
         .then((userCredential) => {
           router.push("/")
