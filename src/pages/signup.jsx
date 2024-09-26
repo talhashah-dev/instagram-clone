@@ -2,11 +2,10 @@
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
 import Image from "next/image";
-import Btn from "@/components/btn.jsx";
-import Input from "@/components/input.jsx";
+import Btn from "@/common/btn.jsx";
+import Input from "@/common/input.jsx";
 import Link from "next/link";
 import Swal from "sweetalert2";
-
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -17,7 +16,6 @@ import {
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
-
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -34,7 +32,6 @@ const Signup = () => {
       ...formData,
       [name]: value,
     });
-
   };
 
   const handleSubmit = () => {
@@ -48,28 +45,24 @@ const Signup = () => {
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then(async (userCredential) => {
           const res = userCredential.user;
-          console.log(res);
           await setDoc(doc(db, "user", res.uid), formData);
-          router.push("/login");
+          router.push("/");
+          console.log(res)
         })
         .catch((error) => {
-
           const errorMessage = error.message;
-
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: errorMessage,
-
-          });
-
+          console.log(errorMessage)
+          // Swal.fire({
+          //   icon: "error",
+          //   title: "Oops...",
+          //   text: errorMessage,
+          // });
         });
     } else {
       Swal.fire({
-        icon: 'warning',
-        title: 'All fields are required!',
-        text: 'Please fill out all the fields.',
-
+        icon: "warning",
+        title: "All fields are required!",
+        text: "Please fill out all the fields.",
       });
     }
   };
@@ -173,7 +166,6 @@ const Signup = () => {
             and
             <span className="font-medium text-cyan-800"> Cookies Policy</span> .
           </p>
-
         </div>
       </div>
     </div>
