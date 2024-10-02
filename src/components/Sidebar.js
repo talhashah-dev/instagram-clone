@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Preloader from "./Preloader/Preloader.jsx";
 import { useRouter } from "next/router";
+import { signOut , auth } from "../lib/firebase.js";
+import Swal from "sweetalert2";
 import {
   Home,
   Search,
@@ -27,6 +30,7 @@ const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,6 +44,29 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogout = () => {
+    console.log("Logging out !")
+    setIsLoggingOut(true)
+    signOut(auth)
+      .then(() => {
+        Swal.fire("You have logged out");
+
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage,
+          customClass: {
+            customColor: 'custom-color',
+          }
+        });
+      })
+      .finally(() => {
+        setIsLoggingOut(false)
+      })
+  }
 
   const loveMessage = () => {
     return "You're like the semicolon to my code; without you, everything falls apart.";
@@ -166,9 +193,9 @@ const Sidebar = () => {
                 <Users size={20} />
                 <span>Switch accounts</span>
               </button>
-              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700">
+              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700" >
                 <LogOut size={20} />
-                <span>Log out</span>
+                <span onClick={handleLogout} >Log out</span>
               </button>
             </div>
             <button
@@ -178,18 +205,27 @@ const Sidebar = () => {
               Cancel
             </button>
           </div>
+       
+          {isLoggingOut && (
+            <div>
+              <Preloader />
+            </div>
+          )}
         </div>
+
       )}
 
       {/* Responsive toggle button */}
-      {isMobile && (
-        <button
-          className="fixed bottom-4 left-4 p-2 rounded-full z-50 bg-white"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          <Menu size={24} className="" />
-        </button>
-      )}
+      {/* {isMobile && (
+        // <button
+        //   className="fixed bottom-4 left-4 p-2 rounded-full z-50 bg-white"
+        //   onClick={() => setIsExpanded(!isExpanded)}
+        // >
+        //   <Menu size={24} className="" />
+        // </button>
+      )} */}
+
+
     </>
   );
 };
