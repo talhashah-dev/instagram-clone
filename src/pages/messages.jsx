@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/layout/Sidebar";
 import React from "react";
 
 const Messages = () => {

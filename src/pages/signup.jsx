@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
 import Image from "next/image";
-import Btn from "@/components/btn.jsx";
-import Input from "@/components/input.jsx";
+import Btn from "@/common/btn.jsx";
+import Input from "@/common/input.jsx";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import googleplay from "@/assets/images/googleplay.png";
@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 import Preloader from "@/components/Preloader/Preloader.jsx";
 
 const Signup = () => {
-
   const router = useRouter();
   const [isSignUp, setIsSignUp] = useState(false)
   const [formData, setFormData] = useState({
@@ -36,7 +35,6 @@ const Signup = () => {
       ...formData,
       [name]: value,
     });
-
   };
 
   const handleSubmit = () => {
@@ -51,19 +49,15 @@ const Signup = () => {
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then(async (userCredential) => {
           const res = userCredential.user;
-          console.log(res);
           await setDoc(doc(db, "user", res.uid), formData);
-          router.push("/login");
+          router.push("/");
         })
         .catch((error) => {
-
           const errorMessage = error.message;
-
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
+            icon: "error",
+            title: "Oops...",
             text: errorMessage,
-
           });
 
         })
@@ -72,10 +66,9 @@ const Signup = () => {
         })
     } else {
       Swal.fire({
-        icon: 'warning',
-        title: 'All fields are required!',
-        text: 'Please fill out all the fields.',
-
+        icon: "warning",
+        title: "All fields are required!",
+        text: "Please fill out all the fields.",
       });
     }
   };
@@ -179,7 +172,6 @@ const Signup = () => {
             and
             <span className="font-medium text-cyan-800"> Cookies Policy</span> .
           </p>
-
         </div>
 
       </div>

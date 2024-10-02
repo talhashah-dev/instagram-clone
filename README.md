@@ -1,5 +1,3 @@
-Here's an updated `README.md` without Firebase:
-
 ---
 
 # Instagram Clone

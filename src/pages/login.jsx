@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import Image from "next/image";
 import Preloader from "@/components/Preloader/Preloader";
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
 import { faFacebook } from "@fortawesome/free-solid-svg-icons";
-import Btn from "@/components/btn.jsx";
+import Btn from "@/common/btn.jsx";
 import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
@@ -44,8 +45,8 @@ const Page = () => {
         .catch((error) => { 
            const errorMessage = error.message;
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
+            icon: "error",
+            title: "Oops...",
             text: errorMessage,
             customClass: {
               customColor: 'custom-color',
@@ -57,9 +58,9 @@ const Page = () => {
         })
     } else {
       Swal.fire({
-        icon: 'warning',
-        title: 'All fields are required!',
-        text: 'Please fill out all the fields.',
+        icon: "warning",
+        title: "All fields are required!",
+        text: "Please fill out all the fields.",
       });
     }
   };
@@ -149,4 +150,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Login;
