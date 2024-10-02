@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
 import {
   Home,
   Search,
@@ -11,7 +12,7 @@ import {
   Heart,
   PlusSquare,
   Menu,
-  Settings, 
+  Settings,
   Activity,
   Bookmark,
   Moon,
@@ -21,6 +22,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { AiFillInstagram } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -38,7 +40,7 @@ const Sidebar = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);  
+  }, []);
 
   const links = [
     { icon: <Home size={24} />, title: "Home", path: "/" },
@@ -71,6 +73,17 @@ const Sidebar = () => {
     if (isMobile) {
       setIsExpanded(false);
     }
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth).catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    });
   };
 
   return (
@@ -162,7 +175,7 @@ const Sidebar = () => {
                 <Users size={20} />
                 <span>Switch accounts</span>
               </button>
-              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700">
+              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700" onClick={handleLogout}>
                 <LogOut size={20} />
                 <span>Log out</span>
               </button>
