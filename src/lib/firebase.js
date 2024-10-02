@@ -1,29 +1,49 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore , doc , setDoc } from "firebase/firestore";
+import { initializeApp, getApps , getApp } from "firebase/app";
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut ,
+  sendPasswordResetEmail,
+
+} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDAtEhyKjjOq0LIJp9LdyDHuNhpUE8stqM",
+  authDomain: "instagramclone-50ea1.firebaseapp.com",
+  projectId: "instagramclone-50ea1",
+  storageBucket: "instagramclone-50ea1.appspot.com",
+  messagingSenderId: "392623062530",
+  appId: "1:392623062530:web:b548b287591e0362d3f11b",
+  measurementId: "G-GQFQL5ZNF6"
+  
 };
 
-const app = initializeApp(firebaseConfig);
+
+
+
+const app = initializeApp(firebaseConfig)
 const auth = getAuth(app);
 const db = getFirestore(app);
-const analytics = getAnalytics(app);
+
+let analytics;
+if (typeof window !== "undefined") {
+  analytics = getAnalytics(app);
+}
 
 export {
-   auth,
-   db,
-   doc,
-   setDoc,
-   createUserWithEmailAndPassword,
-   signInWithEmailAndPassword,
-
-  
-   };
+  auth,
+  db,
+  getAuth,
+  onAuthStateChanged,
+  doc,
+  setDoc,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  analytics,
+};

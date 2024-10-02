@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Preloader from "./Preloader/Preloader.jsx";
 import { useRouter } from "next/router";
+import { signOut , auth } from "../lib/firebase.js";
+import Swal from "sweetalert2";
 import {
   Home,
   Search,
@@ -11,7 +14,7 @@ import {
   Heart,
   PlusSquare,
   Menu,
-  Settings, 
+  Settings,
   Activity,
   Bookmark,
   Moon,
@@ -27,6 +30,7 @@ const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,13 +44,36 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogout = () => {
+    console.log("Logging out !")
+    setIsLoggingOut(true)
+    signOut(auth)
+      .then(() => {
+        Swal.fire("You have logged out");
+
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage,
+          customClass: {
+            customColor: 'custom-color',
+          }
+        });
+      })
+      .finally(() => {
+        setIsLoggingOut(false)
+      })
+  }
 
   const loveMessage = () => {
     return "You're like the semicolon to my code; without you, everything falls apart.";
   };
-  
+
   console.log(loveMessage());
-  
+
 
   const links = [
     { icon: <Home size={24} />, title: "Home", path: "/" },
@@ -57,7 +84,7 @@ const Sidebar = () => {
     {
       icon: <Heart size={24} />,
       title: "Notifications",
-      path: "/notifications",
+      path: "#",
     },
     { icon: <PlusSquare size={24} />, title: "Create", path: "#" },
   ];
@@ -84,9 +111,8 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-screen ${
-          isExpanded ? "w-[244px]" : "w-[72px]"
-        } border-r border-gray-800 bg-black text-white p-3 transition-all duration-300 ease-in-out z-50`}
+        className={`fixed top-0 left-0 h-screen ${isExpanded ? "w-[244px]" : "w-[72px]"
+          } border-r border-gray-800 bg-black text-white p-3 transition-all duration-300 ease-in-out z-50`}
       >
         <div className="py-3 mb-6">
           {isExpanded ? (
@@ -107,9 +133,8 @@ const Sidebar = () => {
               <li key={link.title}>
                 <button
                   onClick={() => handleNavigation(link.path)}
-                  className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 active:bg-zinc-700  w-full text-left ${
-                    router.pathname === link.path ? "font-bold bg-zinc-800" : ""
-                  } ${isExpanded ? "" : "justify-center"}`}
+                  className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 active:bg-zinc-700  w-full text-left ${router.pathname === link.path ? "font-bold bg-zinc-800" : ""
+                    } ${isExpanded ? "" : "justify-center"}`}
                 >
                   {link.icon}
                   {isExpanded && <span>{link.title}</span>}
@@ -121,9 +146,8 @@ const Sidebar = () => {
         <div className="mt-auto">
           <button
             onClick={() => handleNavigation("/profile")}
-            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full ${
-              router.pathname === "/profile" ? "font-bold bg-zinc-800" : ""
-            } ${isExpanded ? "" : "justify-center"}`}
+            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full ${router.pathname === "/profile" ? "font-bold bg-zinc-800" : ""
+              } ${isExpanded ? "" : "justify-center"}`}
           >
             <Image
               src="/placeholder.svg?height=24&width=24"
@@ -135,9 +159,8 @@ const Sidebar = () => {
             {isExpanded && <span>Profile</span>}
           </button>
           <button
-            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full mt-2 ${
-              isExpanded ? "" : "justify-center"
-            }`}
+            className={`flex items-center gap-4 px-3 py-3 text-base font-normal rounded-md hover:bg-zinc-800 w-full mt-2 ${isExpanded ? "" : "justify-center"
+              }`}
             onClick={toggleModal}
           >
             <Menu size={24} />
@@ -170,9 +193,9 @@ const Sidebar = () => {
                 <Users size={20} />
                 <span>Switch accounts</span>
               </button>
-              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700">
+              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700" >
                 <LogOut size={20} />
-                <span>Log out</span>
+                <span onClick={handleLogout} >Log out</span>
               </button>
             </div>
             <button
@@ -182,18 +205,27 @@ const Sidebar = () => {
               Cancel
             </button>
           </div>
+       
+          {isLoggingOut && (
+            <div>
+              <Preloader />
+            </div>
+          )}
         </div>
+
       )}
 
       {/* Responsive toggle button */}
-      {isMobile && (
-        <button
-          className="fixed bottom-4 left-4 p-2 rounded-full z-50 bg-white"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          <Menu size={24} className="" />
-        </button>
-      )}
+      {/* {isMobile && (
+        // <button
+        //   className="fixed bottom-4 left-4 p-2 rounded-full z-50 bg-white"
+        //   onClick={() => setIsExpanded(!isExpanded)}
+        // >
+        //   <Menu size={24} className="" />
+        // </button>
+      )} */}
+
+
     </>
   );
 };
