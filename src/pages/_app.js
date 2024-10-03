@@ -1,27 +1,21 @@
 import "@/styles/globals.css";
-import { onAuthStateChanged, auth  } from "../lib/firebase.js";
+import { onAuthStateChanged, auth } from "../lib/firebase";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-
-        console.log(uid)
-      
       } else {
-        router.push('/login')
+        router.push("/login");
       }
-      user ? null : router.push("/login");
     });
+
     return () => unsubscribe();
-    
-
-  }, [router])
-
   }, [router]);
 
   return <Component {...pageProps} />;

@@ -38,7 +38,6 @@ const Signup = () => {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
     setIsSignUp(true)
     if (
       formData.email &&
@@ -182,9 +181,10 @@ const Signup = () => {
         <Image
           src={googleplay}
           alt="google play store"
-          className="w-5/12 h-12 md:w-40"
+          className="w-5/12 md:w-40"
+          height={48}
         />
-        <Image src={microsoft} alt="Microsoft" className="w-4/12 h-12 md:w-40 " />
+        <Image src={microsoft} alt="Microsoft" className="w-4/12 md:w-40" height={48} />
       </div>
       {isSignUp && (
         <div>

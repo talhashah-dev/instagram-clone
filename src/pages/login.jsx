@@ -9,16 +9,15 @@ import Btn from "@/common/btn.jsx";
 import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
-import Input from "@/components/input.jsx";
+import Input from "@/common/input";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { auth, signInWithEmailAndPassword } from "@/lib/firebase";
 
+const Login = () => {
+  const router = useRouter();
 
-const Page = () => {
- const router = useRouter()
-
-  const [islogIn, setIsLogIn] = useState(false)
+  const [islogIn, setIsLogIn] = useState(false);
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -34,28 +33,27 @@ const Page = () => {
 
   const handleSubmit = () => {
     if (data.password && data.username) {
-      console.log(data);
-      setIsLogIn(true)
+      setIsLogIn(true);
       signInWithEmailAndPassword(auth, data.username, data.password)
         .then((userCredential) => {
           const user = userCredential.user;
           Swal.fire("You're Welcome!");
-          router.push("/profile")
+          router.push("/profile");
         })
-        .catch((error) => { 
-           const errorMessage = error.message;
+        .catch((error) => {
+          const errorMessage = error.message;
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: errorMessage,
             customClass: {
-              customColor: 'custom-color',
-            }
-          })
+              customColor: "custom-color",
+            },
+          });
         })
         .finally(() => {
-          setIsLogIn(false)
-        })
+          setIsLogIn(false);
+        });
     } else {
       Swal.fire({
         icon: "warning",
@@ -114,8 +112,10 @@ const Page = () => {
           />
 
           <div className="mt-4 flex justify-center items-center">
-            <Link className="text-xs text-blue-500 " href="/forgotpassword" >Forgot Password ?</Link>
-         </div>
+            <Link className="text-xs text-blue-500 " href="/forgotpassword">
+              Forgot Password ?
+            </Link>
+          </div>
         </div>
 
         <div className="mt-10 flex justify-center items-center gap-1 md:border-2 md:w-80 md:h-4 md:m-auto md:mt-5 md:py-5 ">
@@ -138,7 +138,11 @@ const Page = () => {
             alt="google play store"
             className="w-5/12 h-12 md:w-40"
           />
-          <Image src={microsoft} alt="Microsoft" className="w-4/12 h-12 md:w-40 " />
+          <Image
+            src={microsoft}
+            alt="Microsoft"
+            className="w-4/12 h-12 md:w-40 "
+          />
         </div>
         {islogIn && (
           <div>
