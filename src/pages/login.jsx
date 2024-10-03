@@ -4,8 +4,6 @@ import Image from "next/image";
 import Preloader from "@/components/Preloader/Preloader";
 import React, { useState } from "react";
 import insta from "@/assets/images/insta.png";
-import { faFacebook } from "@fortawesome/free-solid-svg-icons";
-import Btn from "@/common/btn.jsx";
 import Link from "next/link";
 import googleplay from "@/assets/images/googleplay.png";
 import microsoft from "@/assets/images/microsoft.png";
@@ -104,13 +102,6 @@ const Login = () => {
             <hr className="border border-slate-300 w-2/3" />
           </div>
 
-          <Btn
-            icon={faFacebook}
-            className="text-sm text-blue-500 font-semibold ml-2 "
-            value="Log in with Facebook"
-            href="/Facebook"
-          />
-
           <div className="mt-4 flex justify-center items-center">
             <Link className="text-xs text-blue-500 " href="/forgotpassword">
               Forgot Password ?
@@ -152,6 +143,6 @@ const Login = () => {
       </div>
     </>
   );
-};
+};  
 
 export default Login;
