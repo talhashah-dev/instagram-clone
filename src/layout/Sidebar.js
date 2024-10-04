@@ -175,7 +175,10 @@ const Sidebar = () => {
                 <Users size={20} />
                 <span>Switch accounts</span>
               </button>
-              <button className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700" onClick={handleLogout}>
+              <button
+                className="flex items-center gap-3 w-full text-left py-2 px-3 rounded-md hover:bg-zinc-700"
+                onClick={handleLogout}
+              >
                 <LogOut size={20} />
                 <span>Log out</span>
               </button>

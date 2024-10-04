@@ -6,6 +6,8 @@ import Btn from "@/common/btn.jsx";
 import Input from "@/common/input.jsx";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import googleplay from "@/assets/images/googleplay.png";
+import microsoft from "@/assets/images/microsoft.png";
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -14,10 +16,11 @@ import {
   setDoc,
 } from "../lib/firebase.js";
 import { useRouter } from "next/navigation";
+import Preloader from "@/components/Preloader/Preloader.jsx";
 
 const Signup = () => {
   const router = useRouter();
-
+  const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     fullname: "",
@@ -35,6 +38,7 @@ const Signup = () => {
   };
 
   const handleSubmit = () => {
+    setIsSignUp(true);
     if (
       formData.email &&
       formData.password &&
@@ -54,6 +58,9 @@ const Signup = () => {
             title: "Oops...",
             text: errorMessage,
           });
+        })
+        .finally(() => {
+          setIsSignUp(false);
         });
     } else {
       Swal.fire({
@@ -76,10 +83,10 @@ const Signup = () => {
           </p>
         </div>
 
-        <div className=" bg-cyan-500 flex justify-center  w-60 mt-5 m-auto py-2 gap-2 rounded-md">
+        <div className=" bg-cyan-500 text-sm flex justify-center  w-60 mt-5 m-auto py-2 gap-2 rounded-md">
           <Link href="/login">
             <Btn
-              className="text-xs text-white font-bold ml-2"
+              className="text-sm h-5 text-white font-semibold "
               style={{ color: "white" }}
               value="Already have an account "
             />
@@ -87,12 +94,12 @@ const Signup = () => {
         </div>
 
         <div className="w-60 flex justify-center items-center gap-4 mt-4 mb-4 m-auto">
-          <hr className="border border-slate-300 w-1/3" />
+          <hr className="border border-slate-300 w-2/3" />
           <p className=" text-xs">OR</p>
-          <hr className="border border-slate-300 w-1/3" />
+          <hr className="border border-slate-300 w-2/3" />
         </div>
 
-        <div className=" mt-16 h-20 flex flex-col justify-center items-center">
+        <div className=" mt-20 h-20 flex flex-col justify-center items-center">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -106,7 +113,7 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               className={
-                "bg-slate-100 w-60 h-8 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
+                "bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
               }
             />
             <Input
@@ -116,7 +123,7 @@ const Signup = () => {
               value={formData.fullname}
               onChange={handleChange}
               className={
-                "bg-slate-100 w-60 h-8 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
+                "bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
               }
             />
             <Input
@@ -126,7 +133,7 @@ const Signup = () => {
               value={formData.username}
               onChange={handleChange}
               className={
-                "bg-slate-100 w-60 h-8 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
+                "bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
               }
             />
             <Input
@@ -136,7 +143,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               className={
-                "bg-slate-100 w-60 h-8 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
+                "bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2 border-slate-300 "
               }
             />
 
@@ -144,7 +151,7 @@ const Signup = () => {
               <input
                 type="submit"
                 value="Sign Up"
-                className=" text-xs text-white font-bold"
+                className=" text-sm text-white font-semibold"
               />
             </div>
           </form>
@@ -156,7 +163,7 @@ const Signup = () => {
             information to Instagram.
             <span className="font-medium text-cyan-800">Learn More</span>
           </p>
-          <p className="text-xs mt-7">
+          <p className="text-xs mt-6">
             By signing up, you agree to our{" "}
             <span className="font-medium text-cyan-800">Terms</span> ,
             <span className="font-medium text-cyan-800">Privacy Policy</span>{" "}
@@ -165,6 +172,28 @@ const Signup = () => {
           </p>
         </div>
       </div>
+      <div className=" mt-12 flex justify-center   ">
+        <p className="text-sm md:text-base "> Get the app .</p>
+      </div>
+      <div className="flex justify-center items-center mt-5 gap-2">
+        <Image
+          src={googleplay}
+          alt="google play store"
+          className="w-5/12 md:w-40"
+          height={48}
+        />
+        <Image
+          src={microsoft}
+          alt="Microsoft"
+          className="w-4/12 md:w-40"
+          height={48}
+        />
+      </div>
+      {isSignUp && (
+        <div>
+          <Preloader />
+        </div>
+      )}
     </div>
   );
 };
