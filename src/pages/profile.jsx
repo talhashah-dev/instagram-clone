@@ -2,8 +2,6 @@ import Sidebar from "@/layout/Sidebar";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 
-
-
 const Profile = () => {
   const [userName, setUserName] = useState("Syed Talha");
   const [userId, setUserId] = useState("talhashah-dev");

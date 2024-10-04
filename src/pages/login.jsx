@@ -66,7 +66,7 @@ const Login = () => {
       <div className="w-full h-screen mt-0 mr-0 mb-10 ml-0 pt-20 pr-0">
         <div className=" h-auto md:border-2 md:w-80 md:h-96 md:m-auto md:py-8 lg:items-end">
           <div className=" w-full h-14 flex justify-center  ">
-            <Image src={insta} alt="logo" className=" h-26 w-44 " />
+            <Image src={insta} alt="logo" className="h-26 w-44" />
           </div>
 
           <div className=" mt-16 h-20 flex flex-col justify-center items-center">
@@ -74,7 +74,7 @@ const Login = () => {
               type="text"
               name="username"
               value={data.username}
-              className="bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2   "
+              className="bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2"
               placeholder="Phone number , username or email"
               onChange={handleChange}
             />
@@ -83,7 +83,7 @@ const Login = () => {
               type="password"
               name="password"
               value={data.password}
-              className="bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2   "
+              className="bg-gray-50 w-60 h-9 text-xs py-2 px-2 mb-2 rounded border-2"
               placeholder="Password"
               onChange={handleChange}
             />
@@ -143,6 +143,6 @@ const Login = () => {
       </div>
     </>
   );
-};  
+};
 
 export default Login;

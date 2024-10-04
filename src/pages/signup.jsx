@@ -20,7 +20,7 @@ import Preloader from "@/components/Preloader/Preloader.jsx";
 
 const Signup = () => {
   const router = useRouter();
-  const [isSignUp, setIsSignUp] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     fullname: "",
@@ -38,12 +38,12 @@ const Signup = () => {
   };
 
   const handleSubmit = () => {
-    setIsSignUp(true)
+    setIsSignUp(true);
     if (
       formData.email &&
       formData.password &&
       formData.username &&
-      formData.fullname 
+      formData.fullname
     ) {
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
         .then(async (userCredential) => {
@@ -58,11 +58,10 @@ const Signup = () => {
             title: "Oops...",
             text: errorMessage,
           });
-
         })
         .finally(() => {
-          setIsSignUp(false)
-        })
+          setIsSignUp(false);
+        });
     } else {
       Swal.fire({
         icon: "warning",
@@ -172,7 +171,6 @@ const Signup = () => {
             <span className="font-medium text-cyan-800"> Cookies Policy</span> .
           </p>
         </div>
-
       </div>
       <div className=" mt-12 flex justify-center   ">
         <p className="text-sm md:text-base "> Get the app .</p>
@@ -184,7 +182,12 @@ const Signup = () => {
           className="w-5/12 md:w-40"
           height={48}
         />
-        <Image src={microsoft} alt="Microsoft" className="w-4/12 md:w-40" height={48} />
+        <Image
+          src={microsoft}
+          alt="Microsoft"
+          className="w-4/12 md:w-40"
+          height={48}
+        />
       </div>
       {isSignUp && (
         <div>
