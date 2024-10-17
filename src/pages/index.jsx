@@ -1,3 +1,4 @@
+import MainFeed from "@/layout/MainFeed";
 import Sidebar from "@/layout/Sidebar";
 import Head from "next/head";
 
@@ -8,7 +9,7 @@ export default function Home() {
         <title>Instagram</title>
       </Head>
       <Sidebar />
-      <h1 className="text-white text-lg max-sm:h-screen">Home Page</h1>
+      <MainFeed />
     </div>
   );
 }
