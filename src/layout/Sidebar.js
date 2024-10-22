@@ -89,7 +89,7 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-screen ${
+        className={`h-screen ${
           isExpanded ? "w-[244px]" : "w-[72px]"
         } border-r border-gray-800 bg-black text-white p-3 transition-all duration-300 ease-in-out z-50`}
       >
