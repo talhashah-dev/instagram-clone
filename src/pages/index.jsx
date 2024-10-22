@@ -1,4 +1,4 @@
-import MainFeed from "@/layout/MainFeed";
+import MainFeed from "@/layout/Feed/MainFeed";
 import Sidebar from "@/layout/Sidebar";
 import Head from "next/head";
 
